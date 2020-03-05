@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = false)
 public class ApplicationException extends RuntimeException {
     private ErrorType type;
 
