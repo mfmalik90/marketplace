@@ -34,3 +34,7 @@ CREATE TABLE `listing` (
   CONSTRAINT `user_fkey` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
   CONSTRAINT `category_fkey` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`)
 );
+
+ALTER TABLE `user` ALTER COLUMN id RESTART WITH 100001;
+ALTER TABLE `listing` ALTER COLUMN id RESTART WITH 100001;
+ALTER TABLE `category` ALTER COLUMN id RESTART WITH 100001;
