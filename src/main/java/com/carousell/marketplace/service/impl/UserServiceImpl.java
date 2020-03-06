@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Override
-    public User register(String username) {
+    public User registerUser(String username) {
         User user = new User(username);
         try {
             return userRepository.save(user);

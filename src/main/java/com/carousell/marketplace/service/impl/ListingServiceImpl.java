@@ -8,15 +8,14 @@ import com.carousell.marketplace.error.exception.UserMismatchException;
 import com.carousell.marketplace.repository.ListingRepository;
 import com.carousell.marketplace.service.ListingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
 
-import static com.carousell.marketplace.error.ErrorType.LISTING_NOT_FOUND_MESSAGE;
-import static com.carousell.marketplace.error.ErrorType.LISTING_OWNER_MISMATCH_MESSAGE;
-import static com.carousell.marketplace.error.ErrorType.NOT_FOUND_MESSAGE;
+import static com.carousell.marketplace.error.ErrorType.*;
 
 /**
  * @author faizanmalik
@@ -86,12 +85,14 @@ public class ListingServiceImpl implements ListingService {
     }
 
     @Override
+    @Cacheable("categories")
     public String getTopCategory() {
-        return "todo";
-//        return listingRepository
-//            .lookTopCategory()
-//            .getCategory()
-//            .getName();
+        return listingRepository
+            .lookUpTopCategory()
+            .orElseThrow(() -> new ListingNotFoundException(
+                null,
+                NOT_FOUND_MESSAGE
+            ));
     }
 
     private Listing findListing(Long listingId) {

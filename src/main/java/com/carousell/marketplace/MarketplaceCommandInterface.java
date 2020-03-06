@@ -1,7 +1,6 @@
 package com.carousell.marketplace;
 
 import com.carousell.marketplace.annotation.ExceptionHandler;
-import com.carousell.marketplace.dao.User;
 import com.carousell.marketplace.dto.ListingDto;
 import com.carousell.marketplace.facade.ListingFacade;
 import com.carousell.marketplace.service.UserService;
@@ -33,7 +32,7 @@ public class MarketplaceCommandInterface {
     public String register(
         @ShellOption String username
     ) {
-        service.register(username);
+        service.registerUser(username);
         return SUCCESS;
     }
 
@@ -105,3 +104,8 @@ public class MarketplaceCommandInterface {
     }
 
 }
+
+//REGISTER f
+//CREATE_LISTING f t1 d1 11 c2
+//GET_TOP_CATEGORY f
+//tes

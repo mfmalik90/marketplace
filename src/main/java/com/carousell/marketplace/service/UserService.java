@@ -7,6 +7,6 @@ import com.carousell.marketplace.dao.User;
  * creation date 3/4/20
  */
 public interface UserService {
-    User register(String username);
+    User registerUser(String username);
     User getUser(String username);
 }

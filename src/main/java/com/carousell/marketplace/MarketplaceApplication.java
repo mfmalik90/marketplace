@@ -20,19 +20,7 @@ import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Util.println
 public class MarketplaceApplication implements CommandLineRunner {
 
 	public static void main(String[] args) {
-		println(getColored("------------------------------------------", 8));
-		println(getColored("------------------------------------------", 8));
-		println("");
 		println(getColored("Starting the Application...", 2));
-		println("");
-		println(getColored("------------------------------------------", 8));
-		println(getColored("------------------------------------------", 8));
-		println("");
-		println(getColored("Type `help` or execute command to continue", 4));
-		println("");
-		println(getColored("------------------------------------------", 8));
-		println(getColored("------------------------------------------", 8));
-		println("");
 		SpringApplication.run(MarketplaceApplication.class, args);
 	}
 

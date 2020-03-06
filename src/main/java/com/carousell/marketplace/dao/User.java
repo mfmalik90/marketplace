@@ -1,5 +1,7 @@
 package com.carousell.marketplace.dao;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
@@ -14,8 +16,10 @@ import java.util.Optional;
  * creation date 3/4/20
  */
 @Data
+@Builder
 @Entity
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "user")
 @EntityListeners(AuditingEntityListener.class)
 public class User {
