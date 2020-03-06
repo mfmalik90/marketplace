@@ -9,7 +9,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.dao.DataIntegrityViolationException;
 
@@ -19,6 +18,7 @@ import static com.carousell.marketplace.TestHelper.mockUser;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 
 /**
  * @author faizanmalik
@@ -42,14 +42,14 @@ public class UserServiceTest {
 
     @Test(expected = UserAlreadyExistException.class)
     public void registerUserTestDuplicateUser() {
-        Mockito.when(userRepository.save(any()))
+        when(userRepository.save(any()))
             .thenThrow(DataIntegrityViolationException.class);
         userService.registerUser(testUserName);
     }
 
     @Test
     public void registerUserTestSuccess() {
-        Mockito.when(userRepository.save(any()))
+        when(userRepository.save(any()))
             .thenReturn(mockUser());
         User savedUser = userService.registerUser(testUserName);
         assertNotNull(savedUser);
@@ -58,14 +58,14 @@ public class UserServiceTest {
 
     @Test(expected = UserNotFoundException.class)
     public void getUserTestNotFound() {
-        Mockito.when(userRepository.findByUsername(testUserName))
+        when(userRepository.findByUsername(testUserName))
             .thenReturn(Optional.empty());
         userService.getUser(testUserName);
     }
 
     @Test
     public void getUserTestSuccess() {
-        Mockito.when(userRepository.findByUsername(testUserName))
+        when(userRepository.findByUsername(testUserName))
             .thenReturn(Optional.of(mockUser()));
         User user = userService.getUser(testUserName);
         assertNotNull(user);
