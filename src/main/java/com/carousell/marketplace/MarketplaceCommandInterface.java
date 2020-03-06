@@ -57,7 +57,7 @@ public class MarketplaceCommandInterface {
     }
 
     @ExceptionHandler
-    @ShellMethod(key = DELETE_LISTING, value = "Delete listings")
+    @ShellMethod(key = DELETE_LISTING, value = "Delete a listing of the user")
     public String deleteListing(
         @ShellOption String username,
         @ShellOption Long listingId
@@ -95,7 +95,7 @@ public class MarketplaceCommandInterface {
     }
 
     @ExceptionHandler
-    @ShellMethod(key = GET_TOP_CATEGORY, value = "Get listings")
+    @ShellMethod(key = GET_TOP_CATEGORY, value = "Get category of the top listings")
     public String getTopCategory(
         @ShellOption String username
     ) {
@@ -104,8 +104,3 @@ public class MarketplaceCommandInterface {
     }
 
 }
-
-//REGISTER f
-//CREATE_LISTING f t1 d1 11 c2
-//GET_TOP_CATEGORY f
-//tes
