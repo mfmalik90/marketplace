@@ -1,1 +1,1 @@
-mvn clean compile install test
+./mvnw clean compile install test

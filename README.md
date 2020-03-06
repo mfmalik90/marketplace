@@ -29,7 +29,8 @@ Category reads can be sorted on Price or creation time.
 
 * The project is implemented in Java with SpringBoot framework (2.0.1.RELEASE) and uses maven for dependency management.
 * This project is a CommandLine Application and doesn't expose any RestAPI
-        
+* <b>Preequisite</b>
+    * Java 1.8, Maven   
         
         Below are the commands exposed by the application
         
