@@ -40,7 +40,7 @@ public class ListingServiceTest {
     }
 
     @Test
-    public void createListingTest() {
+    public void shouldCreateListing() {
         when(listingRepository.save(any()))
             .thenReturn(mockListing());
         Listing listing = listingService
@@ -58,7 +58,7 @@ public class ListingServiceTest {
     }
 
     @Test(expected = ListingNotFoundException.class)
-    public void deleteListingTestNotFound() {
+    public void whenListingNotFound_thenThrowExceptionOnDelete() {
         when(listingRepository.findById(testId))
             .thenReturn(Optional.empty());
         listingService.deleteListing(testId, mockUser());
@@ -70,7 +70,7 @@ public class ListingServiceTest {
     }
 
     @Test(expected = UserMismatchException.class)
-    public void deleteListingTestOwnerMismatch() {
+    public void whenOwnerMismatch_thenThrowException() {
         when(listingRepository.findById(testId))
             .thenReturn(Optional.of(mockListing()));
         User requestUser = mockUser();
@@ -84,7 +84,7 @@ public class ListingServiceTest {
     }
 
     @Test
-    public void deleteListingTestSuccess() {
+    public void shouldDeleteListing() {
         when(listingRepository.findById(testId))
             .thenReturn(Optional.of(mockListing()));
         User requestUser = mockUser();
@@ -96,14 +96,14 @@ public class ListingServiceTest {
     }
 
     @Test(expected = ListingNotFoundException.class)
-    public void getListingTestNotFound() {
+    public void whenListingNotFound_thenThrowException() {
         when(listingRepository.findById(testId))
             .thenReturn(Optional.empty());
         listingService.getListing(testId);
     }
 
     @Test
-    public void getListingTestSuccess() {
+    public void shouldGetListing() {
         when(listingRepository.findById(testId))
             .thenReturn(Optional.of(mockListing()));
         Listing listing = listingService.getListing(testId);
@@ -114,7 +114,7 @@ public class ListingServiceTest {
     }
 
     @Test
-    public void getListingByCategoryTestNoRecord() {
+    public void shouldReturnEmptyListingList() {
         when(listingRepository.findByCategoryId(any(), any()))
             .thenReturn(Collections.emptyList());
         List<Listing> listingList = listingService
@@ -123,7 +123,7 @@ public class ListingServiceTest {
     }
 
     @Test
-    public void getListingByCategorySuccess() {
+    public void shouldReturnListingForCategory() {
         when(listingRepository.findByCategoryId(any(), any()))
             .thenReturn(Collections.singletonList(mockListing()));
         List<Listing> listingList = listingService
@@ -137,14 +137,14 @@ public class ListingServiceTest {
     }
 
     @Test(expected = ListingNotFoundException.class)
-    public void getTopCategoryNotFound() {
+    public void whenListingNotFound_thenThrowExceptionForTopCategory() {
         when(listingRepository.lookUpTopCategory())
             .thenReturn(Optional.empty());
         listingService.getTopCategory();
     }
 
     @Test
-    public void getTopCategorySuccess() {
+    public void shouldReturnTopCategory() {
         when(listingRepository.lookUpTopCategory())
             .thenReturn(Optional.of(testCategoryName));
         String category = listingService.getTopCategory();

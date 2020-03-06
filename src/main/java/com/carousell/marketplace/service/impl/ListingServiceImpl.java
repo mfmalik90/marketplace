@@ -16,6 +16,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import static com.carousell.marketplace.error.ErrorType.*;
+import static com.carousell.marketplace.utils.Constants.*;
 
 /**
  * @author faizanmalik
@@ -107,17 +108,17 @@ public class ListingServiceImpl implements ListingService {
     private Sort getSortOrder(String sortBy, String sortDirection) {
         String sortColumn;
         switch (sortBy) {
-            case "sort_price":
-                sortColumn = "price";
+            case SORT_PRICE:
+                sortColumn = PRICE;
                 break;
-            case "sort_time":
-                sortColumn = "createdAt";
+            case SORT_TIME:
+                sortColumn = CREATED_AT;
                 break;
             default:
-                sortColumn = "id";
+                sortColumn = ID;
                 break;
         }
-        return sortDirection.equals("asc") ?
+        return sortDirection.equals(ASC) ?
             Sort.by(Sort.Direction.ASC, sortColumn) :
             Sort.by(Sort.Direction.DESC, sortColumn);
     }

@@ -41,8 +41,8 @@ public class ListingFacadeImpl implements ListingFacade{
         BigDecimal price,
         String categoryName
     ) {
-        User user = userService.getUser(username);
-        Category category = categoryService.getOrCreate(categoryName);
+        final User user = userService.getUser(username);
+        final Category category = categoryService.getOrCreate(categoryName);
         Listing listing = listingService
             .createListing(
                 title,
@@ -60,7 +60,7 @@ public class ListingFacadeImpl implements ListingFacade{
         String username,
         Long listingId
     ) {
-        User user = userService.getUser(username);
+        final User user = userService.getUser(username);
         listingService.deleteListing(listingId, user);
     }
 
@@ -84,7 +84,7 @@ public class ListingFacadeImpl implements ListingFacade{
         String sortDirection
     ) {
         userService.getUser(username);
-        Category category = categoryService.getCategory(categoryName);
+        final Category category = categoryService.getCategory(categoryName);
         List<Listing> listings = listingService
             .getListingByCategory(
                 category,

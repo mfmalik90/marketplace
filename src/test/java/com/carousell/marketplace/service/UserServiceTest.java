@@ -41,14 +41,14 @@ public class UserServiceTest {
 
 
     @Test(expected = UserAlreadyExistException.class)
-    public void registerUserTestDuplicateUser() {
+    public void whenDuplicateUser_thenThrowException() {
         when(userRepository.save(any()))
             .thenThrow(DataIntegrityViolationException.class);
         userService.registerUser(testUserName);
     }
 
     @Test
-    public void registerUserTestSuccess() {
+    public void shouldRegisterNewUser() {
         when(userRepository.save(any()))
             .thenReturn(mockUser());
         User savedUser = userService.registerUser(testUserName);
@@ -57,14 +57,14 @@ public class UserServiceTest {
     }
 
     @Test(expected = UserNotFoundException.class)
-    public void getUserTestNotFound() {
+    public void whenUserNotFound_thenThrowException() {
         when(userRepository.findByUsername(testUserName))
             .thenReturn(Optional.empty());
         userService.getUser(testUserName);
     }
 
     @Test
-    public void getUserTestSuccess() {
+    public void shouldReturnUser() {
         when(userRepository.findByUsername(testUserName))
             .thenReturn(Optional.of(mockUser()));
         User user = userService.getUser(testUserName);

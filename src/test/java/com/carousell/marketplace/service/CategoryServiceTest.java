@@ -49,7 +49,7 @@ public class CategoryServiceTest {
 
 
     @Test
-    public void getOrCreateTestSuccess() {
+    public void shouldCreateNewCategory() {
         when(categoryRepository.findByName(testCategoryName))
             .thenReturn(Optional.empty());
         when(categoryRepository.save(any()))
@@ -64,7 +64,7 @@ public class CategoryServiceTest {
     }
 
     @Test
-    public void getOrCreateTestSuccessAlreadyExisted() {
+    public void shouldGetAlreadyExistingCategory() {
         when(categoryRepository.findByName(testCategoryName))
             .thenReturn(Optional.of(mockCategory()));
         when(categoryRepository.save(any()))
@@ -79,14 +79,14 @@ public class CategoryServiceTest {
     }
 
     @Test(expected = CategoryNotFoundException.class)
-    public void getCategoryTestNotFound() {
+    public void whenCategoryNotFound_thenThrowException() {
         when(categoryRepository.findByName(testCategoryName))
             .thenReturn(Optional.empty());
         categoryService.getCategory(testCategoryName);
     }
 
     @Test
-    public void getCategoryTestSuccess() {
+    public void shouldGetCategory() {
         when(categoryRepository.findByName(testCategoryName))
             .thenReturn(Optional.of(mockCategory()));
         Category category = categoryService.getCategory(testCategoryName);

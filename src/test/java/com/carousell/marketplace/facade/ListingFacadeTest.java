@@ -50,7 +50,7 @@ public class ListingFacadeTest {
     }
 
     @Test(expected = UserNotFoundException.class)
-    public void createListingUserNotFound(){
+    public void whenUserNotFound_thenThrowException_onCreateListing(){
         Category category = mockCategory();
         Listing listing = mockListing();
         User user = mockUser();
@@ -87,7 +87,7 @@ public class ListingFacadeTest {
     }
 
     @Test
-    public void createListingSuccess(){
+    public void shouldCreateListing(){
         Category category = mockCategory();
         Listing listing = mockListing();
         User user = mockUser();
@@ -130,7 +130,7 @@ public class ListingFacadeTest {
     }
 
     @Test(expected = UserNotFoundException.class)
-    public void deleteListingUserNotFound() {
+    public void whenUserNotFound_thenThrowException_onDeleteListing() {
         User user = mockUser();
         when(userService.getUser(testUserName))
             .thenThrow(UserNotFoundException.class);
@@ -142,7 +142,7 @@ public class ListingFacadeTest {
     }
 
     @Test(expected = ListingNotFoundException.class)
-    public void deleteListingListingNotFound() {
+    public void whenListingNotFound_thenThrowException_onDeleteListing() {
         User user = mockUser();
         when(userService.getUser(testUserName))
             .thenReturn(user);
@@ -156,7 +156,7 @@ public class ListingFacadeTest {
     }
 
     @Test(expected = UserMismatchException.class)
-    public void deleteListingOwnerMismatch() {
+    public void whenOwnerMismatch_thenThrowException_onDeleteListing() {
         User user = mockUser();
         when(userService.getUser(testUserName))
             .thenReturn(user);
@@ -170,7 +170,7 @@ public class ListingFacadeTest {
     }
 
     @Test
-    public void deleteListingSuccess() {
+    public void shouldDeleteListing() {
         User user = mockUser();
         when(userService.getUser(testUserName))
             .thenReturn(user);
@@ -182,7 +182,7 @@ public class ListingFacadeTest {
     }
 
     @Test(expected = UserNotFoundException.class)
-    public void getListingUserNotFound() {
+    public void whenUserNotFound_thenThrowException_onGetListing() {
         when(userService.getUser(testUserName))
             .thenThrow(UserNotFoundException.class);
         listingFacade.getListing(testUserName, testId);
@@ -193,7 +193,7 @@ public class ListingFacadeTest {
     }
 
     @Test(expected = ListingNotFoundException.class)
-    public void getListingNotFound() {
+    public void whenListingNotFound_thenThrowException_onGetListing() {
         when(userService.getUser(testUserName))
             .thenReturn(mockUser());
         when(listingService.getListing(testId))
@@ -206,7 +206,7 @@ public class ListingFacadeTest {
     }
 
     @Test
-    public void getListingSuccess() {
+    public void shouldGetListing() {
         User user = mockUser();
         Listing listing = mockListing();
         when(userService.getUser(testUserName))
@@ -227,7 +227,7 @@ public class ListingFacadeTest {
     }
 
     @Test(expected = UserNotFoundException.class)
-    public void getListingByCategoryUserNotFound() {
+    public void whenUserNotFound_thenThrowException_onGetListingByCategory() {
         when(userService.getUser(testUserName))
             .thenThrow(UserNotFoundException.class);
         listingFacade.getListingByCategory(
@@ -239,7 +239,7 @@ public class ListingFacadeTest {
     }
 
     @Test(expected = CategoryNotFoundException.class)
-    public void getListingByCategoryCategoryNotFound() {
+    public void whenCategoryNotFound_thenThrowException_onGetListingByCategory() {
         when(userService.getUser(testUserName))
             .thenReturn(mockUser());
         when(categoryService.getCategory(testCategoryName))
@@ -253,7 +253,7 @@ public class ListingFacadeTest {
     }
 
     @Test
-    public void getListingByCategorySuccess() {
+    public void shouldGetListingByCategory() {
         User user = mockUser();
         Category category = mockCategory();
         Listing listing = mockListing();
@@ -289,7 +289,7 @@ public class ListingFacadeTest {
     }
 
     @Test(expected = UserNotFoundException.class)
-    public void getTopCategoryUserNotFound() {
+    public void whenUserNotFound_thenThrowException_onGetTopCategory() {
         when(userService.getUser(testUserName))
             .thenThrow(UserNotFoundException.class);
         listingFacade.getTopCategory(testUserName);
@@ -300,7 +300,7 @@ public class ListingFacadeTest {
     }
 
     @Test
-    public void getTopCategorySuccess() {
+    public void shouldGetTopCategory() {
         when(userService.getUser(testUserName))
             .thenReturn(mockUser());
         when(listingService.getTopCategory())
