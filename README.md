@@ -60,3 +60,68 @@ Category reads can be sorted on Price or creation time.
  This operation is expected to be a read heavy operation as it can be used on the home page etc. Please ensure suitable optimization for the same.
     
     * cache ttl can be configured in application.properties with property <b>cache-evict.ttl.categories</b>
+    
+    
+ # Sample commands
+ 
+     REGISTER user1
+     CREATE_LISTING user1 'Phone model 8' 'Black color, brand new' 1000 'Electronics'
+     GET_LISTING user1 100001
+     CREATE_LISTING user1 'Black shoes' 'Training shoes' 100 'Sports'
+     REGISTER user2
+     REGISTER user2
+     CREATE_LISTING user2 'T-shirt' 'White color' 20 'Sports'
+     GET_LISTING user1 100003
+     GET_CATEGORY user1 'Fashion' sort_time asc
+     GET_CATEGORY user1 'Sports' sort_time dsc
+     GET_CATEGORY user1 'Sports' sort_price dsc
+     GET_TOP_CATEGORY user1
+     DELETE_LISTING user1 100003
+     DELETE_LISTING user2 100003
+     GET_TOP_CATEGORY user2
+     DELETE_LISTING user1 100002
+     GET_TOP_CATEGORY user1
+     GET_TOP_CATEGORY user3
+     
+ 
+ Console Output for the above commands
+ 
+        >REGISTER user1
+        Success
+        >CREATE_LISTING user1 'Phone model 8' 'Black color, brand new' 1000 'Electronics'
+        100001
+        >GET_LISTING user1 100001
+        Phone model 8|Black color, brand new|1000.0000|2020-03-06 18:01:18.979|Electronics|user1
+        >CREATE_LISTING user1 'Black shoes' 'Training shoes' 100 'Sports'
+        100002
+        >REGISTER user2
+        Success
+        >REGISTER user2
+        Error - user already existing
+        >CREATE_LISTING user2 'T-shirt' 'White color' 20 'Sports'
+        100003
+        >GET_LISTING user1 100003
+        T-shirt|White color|20.0000|2020-03-06 18:01:47.021|Sports|user2
+        >GET_CATEGORY user1 'Fashion' sort_time asc
+        Error - category not found
+        >GET_CATEGORY user1 'Sports' sort_time dsc
+        T-shirt|White color|20.0000|2020-03-06 18:01:47.021|Sports|user2
+        Black shoes|Training shoes|100.0000|2020-03-06 18:01:29.024|Sports|user1
+        >GET_CATEGORY user1 'Sports' sort_price dsc
+        Black shoes|Training shoes|100.0000|2020-03-06 18:01:29.024|Sports|user1
+        T-shirt|White color|20.0000|2020-03-06 18:01:47.021|Sports|user2
+        >GET_TOP_CATEGORY user1
+        Sports
+        >DELETE_LISTING user1 100003
+        Error - listing owner mismatch
+        >DELETE_LISTING user2 100003
+        Success
+        >GET_TOP_CATEGORY user2
+        Sports
+        >DELETE_LISTING user1 100002
+        Success
+        >GET_TOP_CATEGORY user1
+        Sports
+        >GET_TOP_CATEGORY user3
+        Error - unknown user
+        >     
